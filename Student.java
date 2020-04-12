@@ -1,60 +1,78 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-class Student {
-	String index;
-	String firstName;
-	String lastName;
-	public class ListAddPoeni {
 
-		public static void main(int[] args) {
+class Student{
+	String index, fName, lName;
+	List<Integer> listaPoeni;
+	boolean potpis;
 
-			List<int> poeni = new ArrayList<>();
-
-			poeni.add(25);
-			poeni.add(15);
-			poeni.add(10);
-			poeni.add(30);
-			poeni.add(50);
-			System.out.println(poeni);
-		}
-	}
-	//TODO constructor
-
-	public Student() {
+	public Student(){
+		index=fName=lName="";
+		potpis=false;
 	}
 
-	//TODO seters & getters
+	public Student(String index, String fName, String lName, boolean potpis){
+		this.index = index;
+		this.fName = fName;
+		this.lName = lName;
+		this.listaPoeni = new ArrayList<>();
+		this.potpis = potpis;
+	}
 
-
-	public String getIndex() {
+	public String getIndex(){
 		return index;
 	}
 
-	public void setIndex(String index) {
+	public void setIndex(String index){
 		this.index = index;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getfName(){
+		return fName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setfName(String fName){
+		this.fName = fName;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getlName(){
+		return lName;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setlName(String lName){
+		this.lName = lName;
 	}
 
-	public double getAverage() {
-		//TODO
+	double getAverage(){
+		return listaPoeni.stream().mapToDouble(x->x).sum()/listaPoeni.size();
 	}
 
-	public boolean hasSignature() {
-		//TODO
+	boolean hasSignature(){
+		return potpis;
+	}
+
+	void addPoeni(int poeni){
+		listaPoeni.add(poeni);
+	}
+
+	void dajPotpis(){
+		potpis=true;
+	}
+
+	@Override
+	public String toString(){
+		return "Student{" +
+				"index='" + index + '\'' +
+				", fName='" + fName + '\'' +
+				", lName='" + lName + '\'' +
+				", listaPoeni=" + listaPoeni +
+				", potpis=" + potpis +
+				'}';
 	}
 }
+
+
