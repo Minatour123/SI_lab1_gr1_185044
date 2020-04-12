@@ -75,4 +75,70 @@ class Student{
 	}
 }
 
+class Course{
+	List<Student> studentList;
 
+	public Course(){
+		this.studentList = new ArrayList<>();
+	}
+
+	void addStudent(Student student){
+		studentList.add(student);
+	}
+
+	void listStudents(){
+		System.out.println("\n========================\n");
+		for(Student student : studentList){
+			System.out.println(student);
+		}
+		System.out.println("\n========================\n");
+	}
+
+	void addPoeni(String index, int poeni){
+		for(Student student:studentList){
+			if(student.getIndex().equals(index)){
+				student.addPoeni(poeni);
+			}
+		}
+	}
+
+	void dajPotpis(String index){
+		for(Student student:studentList){
+			if(student.getIndex().equals(index)){
+				student.dajPotpis();
+			}
+		}
+	}
+
+	void izbrisiStudent(String index){
+		studentList.removeIf(student -> student.getIndex().equals(index));
+	}
+}
+
+public class Tester{
+	public static void main(String[] args) throws IOException{
+		Course course = new Course();
+
+		BufferedReader br = new BufferedReader(new FileReader("src/students.csv"));
+
+		String line=br.readLine();
+		while(line!=null){
+			String[] split = line.split(";");
+			Student temp = new Student(split[0], split[1], split[2], false);
+			course.addStudent(temp);
+			line=br.readLine();
+		}
+
+		course.listStudents();
+
+		course.addPoeni("182017", 10);
+		course.addPoeni("185044", 5);
+		course.dajPotpis("182025");
+
+		course.listStudents();
+
+		course.izbrisiStudent("169420");
+
+		course.listStudents();
+	}
+}
